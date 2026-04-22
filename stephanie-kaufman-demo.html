@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephanie Kaufman — Boca Raton Luxury Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F7F3EE;
+  --warm-white:#FDFAF7;
+  --espresso:#1C1410;
+  --mocha:#3D2B1F;
+  --champagne:#C9A96E;
+  --champagne-dark:#A07A3E;
+  --champagne-light:#E8D5B0;
+  --sand:#E8E0D4;
+  --text-muted:#5C504A;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--espresso);overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:absolute;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(28,20,16,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:background 0.3s}
+
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:#fff;letter-spacing:0.08em;text-decoration:none}
+.nav-logo span{color:var(--champagne)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:rgba(255,255,255,0.75);font-size:13px;font-weight:400;text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--champagne) !important;color:var(--espresso) !important;padding:10px 22px;border-radius:2px;font-weight:500 !important}
+.nav-mobile-cta{display:none;background:var(--champagne);color:var(--espresso);padding:9px 18px;border-radius:2px;font-size:13px;font-weight:500;text-decoration:none}
+
+/* ── STICKY BAR ── */
+.sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--espresso);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:2px solid var(--champagne)}
+.sticky-bar p{color:#fff;font-size:13px;font-weight:300;line-height:1;white-space:nowrap}
+.sticky-bar p strong{color:var(--champagne);font-weight:500;display:inline;font-size:14px}
+.sticky-bar a{background:var(--champagne);color:var(--espresso);padding:13px 28px;font-size:13px;font-weight:500;text-decoration:none;border-radius:2px;white-space:nowrap;flex-shrink:0;letter-spacing:0.04em}
+
+/* ── HERO ── */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden;text-align:center;background:#0d0a07}
+/* Fallback static photo — shows instantly */
+.hero-bg{position:absolute;inset:0;z-index:0;background-image:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1800&q=85');background-size:cover;background-position:center top}
+/* Video sits on top of fallback */
+.hero-video{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.hero-video video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover}
+/* Dark gradient overlay — must be z-index 2 */
+.hero-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(5,3,1,0.55) 0%,rgba(5,3,1,0.68) 45%,rgba(5,3,1,0.93) 100%)}
+/* Content — z-index 3 */
+.hero-content{position:relative;z-index:3;padding:0 24px;max-width:720px}
+.hero-eyebrow{font-size:11px;letter-spacing:0.32em;color:var(--champagne);text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeUp 0.9s 0.3s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,7.5vw,90px);font-weight:300;line-height:1.0;color:#fff;margin-bottom:22px;opacity:0;animation:fadeUp 0.9s 0.55s forwards}
+.hero-title em{font-style:italic;color:var(--champagne-light)}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,0.96);line-height:1.85;margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto;opacity:0;animation:fadeUp 0.9s 0.8s forwards}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s 1.0s forwards}
+.btn-primary{background:var(--champagne);color:var(--espresso);padding:17px 36px;font-size:15px;font-weight:500;text-decoration:none;border-radius:2px;letter-spacing:0.05em;display:inline-block;transition:background 0.2s}
+.btn-primary:hover{background:var(--champagne-light)}
+.btn-outline{background:transparent;color:#fff;padding:17px 36px;font-size:15px;font-weight:400;text-decoration:none;border-radius:2px;border:2px solid rgba(255,255,255,0.65);letter-spacing:0.04em;display:inline-block;transition:all 0.2s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.08)}
+.hero-scroll{position:absolute;bottom:90px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 1.4s forwards}
+.hero-scroll span{font-size:10px;letter-spacing:0.25em;color:rgba(255,255,255,0.55);text-transform:uppercase}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--champagne),transparent);animation:scrollPulse 2.2s ease-in-out infinite}
+
+/* ── STATS ── */
+.stats-bar{background:var(--espresso);display:grid;grid-template-columns:repeat(3,1fr)}
+.stat-item{padding:30px 20px;text-align:center;border-right:1px solid rgba(255,255,255,0.1)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--champagne);display:block;line-height:1}
+.stat-label{font-size:11px;letter-spacing:0.16em;color:rgba(255,255,255,0.65);text-transform:uppercase;margin-top:7px;display:block}
+
+/* ── SECTION BASE ── */
+section{padding:96px 40px}
+.section-eyebrow{font-size:11px;letter-spacing:0.28em;color:var(--champagne-dark);text-transform:uppercase;margin-bottom:14px;font-weight:500}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,62px);font-weight:300;line-height:1.07;color:var(--espresso);margin-bottom:18px}
+.section-title em{font-style:italic}
+.divider{width:48px;height:1px;background:var(--champagne);margin-bottom:44px}
+
+/* ── ABOUT ── */
+.about{background:var(--cream)}
+.about-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.about-img-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;display:block;border-radius:2px}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--espresso);padding:22px 26px;text-align:center}
+.about-badge .num{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:var(--champagne);display:block;line-height:1}
+.about-badge .lbl{font-size:10px;letter-spacing:0.22em;color:rgba(255,255,255,0.7);text-transform:uppercase;display:block;margin-top:5px}
+.about-body p{font-size:16px;font-weight:300;line-height:1.9;color:var(--mocha);margin-bottom:18px}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:32px}
+.cert-pill{background:#fff;border:1px solid var(--sand);padding:11px 10px;font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--mocha);text-align:center;border-radius:2px}
+.lang-badge{margin-top:28px;display:inline-flex;align-items:center;gap:12px;padding:14px 20px;background:#fff;border:1px solid var(--sand);border-radius:2px}
+.lang-badge img{height:28px;width:auto}
+.lang-badge span{font-size:13px;color:var(--mocha);letter-spacing:0.06em;font-weight:400}
+
+/* ── LISTINGS ── */
+.listings{background:var(--warm-white)}
+.listings-inner{max-width:1080px;margin:0 auto}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.listing-card{background:#fff;border:1px solid var(--sand);border-radius:2px;overflow:hidden;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease}
+.listing-card:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(28,20,16,0.13)}
+.listing-img-wrap{position:relative;overflow:hidden}
+.listing-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s ease}
+.listing-card:hover .listing-img{transform:scale(1.05)}
+.listing-tag-wrap{position:absolute;top:14px;left:14px;z-index:1}
+.listing-tag{display:inline-block;background:var(--espresso);color:var(--champagne);font-size:10px;letter-spacing:0.12em;padding:5px 12px;border-radius:1px;font-weight:600;text-transform:uppercase}
+.listing-body{padding:22px}
+.listing-price{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:var(--espresso);display:block;margin-bottom:5px}
+.listing-addr{font-size:13px;color:var(--text-muted);margin-bottom:14px;display:block;line-height:1.5;font-weight:400}
+.listing-meta{display:flex;gap:18px;font-size:13px;color:var(--text-muted);padding-top:14px;border-top:1px solid var(--sand);font-weight:400}
+.listing-cta{text-align:center;margin-top:44px}
+.listing-cta a{display:inline-block;border:2px solid var(--espresso);color:var(--espresso);padding:15px 44px;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:0.08em;border-radius:2px;transition:all 0.25s}
+.listing-cta a:hover{background:var(--espresso);color:#fff}
+
+/* ── SPECIALTIES — text outside images, fully ADA ── */
+.specialties{background:var(--cream);padding:96px 40px}
+.specialties-inner{max-width:1080px;margin:0 auto}
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:44px}
+.spec-card{background:#fff;border:1px solid var(--sand);border-radius:2px;overflow:hidden;transition:box-shadow 0.3s,transform 0.3s}
+.spec-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(28,20,16,0.1)}
+.spec-img-wrap{overflow:hidden;aspect-ratio:16/9}
+.spec-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s ease}
+.spec-card:hover .spec-img{transform:scale(1.05)}
+.spec-body{padding:24px 22px}
+.spec-tag{display:block;font-size:10px;letter-spacing:0.28em;color:var(--champagne-dark);text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.spec-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--espresso);display:block;margin-bottom:8px}
+.spec-desc{font-size:14px;font-weight:300;color:var(--text-muted);line-height:1.75}
+
+/* ── TESTIMONIALS — horizontal slider ── */
+.testimonials{background:var(--espresso);padding:96px 0 96px}
+.testi-header{padding:0 40px;margin-bottom:44px}
+.testimonials .section-eyebrow{color:var(--champagne)}
+.testimonials .section-title{color:#fff}
+.testimonials .divider{background:rgba(201,169,110,0.35)}
+/* Track wrapper — clips overflow, shows peek of next card */
+.testi-track-outer{overflow:hidden;position:relative;padding-bottom:4px}
+/* The scrollable row */
+.testi-track{display:flex;gap:20px;padding:0 40px 24px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+.testi-track::-webkit-scrollbar{display:none}
+.testi-track.dragging{cursor:grabbing;user-select:none}
+/* Each card — fixed width so partial peek works */
+.testi-card{flex:0 0 calc(85% - 20px);max-width:460px;background:#fff;border-radius:2px;padding:36px 28px;position:relative;scroll-snap-align:start}
+.testi-qmark{font-family:'Cormorant Garamond',serif;font-size:80px;color:var(--champagne-light);position:absolute;top:8px;left:22px;line-height:1;pointer-events:none}
+.testi-text{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;font-style:italic;line-height:1.7;color:var(--mocha);margin-top:32px;padding-top:4px}
+.testi-author{margin-top:22px;display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--sand)}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--champagne-light);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--mocha);flex-shrink:0}
+.testi-name{font-size:14px;font-weight:500;color:var(--espresso);display:block}
+.testi-loc{font-size:12px;color:var(--text-muted);display:block;margin-top:2px}
+.stars{color:var(--champagne-dark);font-size:14px;letter-spacing:3px;margin-bottom:8px}
+/* Dot indicators + progress */
+.testi-footer{display:flex;align-items:center;justify-content:space-between;padding:20px 40px 0;gap:20px}
+.testi-dots{display:flex;gap:8px}
+.testi-dot{width:24px;height:3px;background:rgba(255,255,255,0.2);border-radius:2px;transition:background 0.3s,width 0.3s;cursor:pointer}
+.testi-dot.active{background:var(--champagne);width:36px}
+.testi-counter{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.12em;font-weight:400}
+.testi-arrows{display:flex;gap:10px}
+.testi-arrow{width:40px;height:40px;border:1px solid rgba(255,255,255,0.25);border-radius:50%;background:transparent;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.testi-arrow:hover{border-color:var(--champagne);color:var(--champagne)}
+
+/* ── CONTACT ── */
+.contact{background:var(--warm-white);position:relative}
+.contact-inner{max-width:680px;margin:0 auto}
+.contact-sub{font-size:16px;color:var(--text-muted);font-weight:300;line-height:1.85;margin-bottom:48px}
+.contact-form{display:grid;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.contact-form input,.contact-form select,.contact-form textarea{
+  width:100%;background:#fff;border:1.5px solid var(--sand);
+  color:var(--espresso);padding:15px 18px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:300;
+  border-radius:2px;outline:none;-webkit-appearance:none;appearance:none;
+  transition:border-color 0.2s
+}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#A89D96}
+.contact-form select{color:var(--text-muted)}
+.contact-form select option{color:var(--espresso)}
+.contact-form textarea{resize:vertical;min-height:130px;line-height:1.65}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:var(--champagne-dark);outline:2px solid rgba(160,122,62,0.15)}
+.form-submit{background:var(--espresso);color:#fff;border:none;padding:18px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;letter-spacing:0.06em;cursor:pointer;border-radius:2px;width:100%;transition:background 0.2s}
+.form-submit:hover{background:var(--mocha)}
+.contact-info{margin-top:52px;padding-top:44px;border-top:1px solid var(--sand);display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.contact-row{display:flex;align-items:flex-start;gap:14px}
+.contact-icon{width:40px;height:40px;background:var(--champagne-light);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mocha);margin-top:2px}
+.contact-detail{font-size:15px;color:var(--mocha);font-weight:300;line-height:1.6}
+.contact-detail a{color:var(--espresso);text-decoration:none;font-weight:500}
+.contact-detail a:hover{color:var(--champagne-dark);text-decoration:underline}
+
+/* ── FOOTER ── */
+footer{background:var(--espresso);padding:48px 40px 80px}
+.footer-inner{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;letter-spacing:0.1em}
+.footer-logo span{color:var(--champagne)}
+.footer-sub{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.18em;text-transform:uppercase;margin-top:4px}
+.footer-divider{width:40px;height:1px;background:rgba(201,169,110,0.3);margin:12px 0}
+footer p{font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.9}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.7)}50%{opacity:1;transform:scaleY(1)}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.85s ease,transform 0.85s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .about-inner{grid-template-columns:1fr;gap:48px}
+  .about-badge{right:12px}
+  .listings-grid{grid-template-columns:1fr 1fr}
+  .spec-grid{grid-template-columns:1fr}
+  .contact-info{grid-template-columns:1fr}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-card{flex:0 0 80%}
+}
+@media(max-width:640px){
+  nav{padding:0 20px}
+  .nav-links{display:none !important}
+  .nav-mobile-cta{display:inline-block !important}
+  section,.specialties,.testimonials{padding-left:0;padding-right:0}
+  section{padding:64px 20px}
+  .specialties{padding:64px 20px}
+  .testimonials{padding:64px 0}
+  .testi-header{padding:0 20px;margin-bottom:32px}
+  .testi-track{padding:0 20px 20px}
+  .testi-footer{padding:16px 20px 0}
+  .listings-grid{grid-template-columns:1fr}
+  .spec-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .hero-content{padding:0 20px;padding-bottom:80px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;text-align:center;padding:14px}
+  .hero-scroll{bottom:20px}
+  .sticky-bar{padding:10px 16px;gap:12px}
+  .stats-bar .stat-num{font-size:30px}
+  .about-badge{right:8px;padding:14px 18px}
+  .about-badge .num{font-size:36px}
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-info{grid-template-columns:1fr}
+  .testi-card{flex:0 0 88%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Stephanie <span>Kaufman</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#listings">Properties</a>
+    <a href="#specialties">Specialties</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+  <a href="#contact" class="nav-mobile-cta">Let's Talk</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <!-- Static photo fallback — instant -->
+  <div class="hero-bg"></div>
+  <!-- Pexels video by Ethan Raven — direct MP4, no iframe dependency -->
+  <div class="hero-video">
+    <video autoplay muted loop playsinline preload="auto"
+      poster="https://images.pexels.com/videos/31617692/pexels-photo-31617692.jpeg?auto=compress&cs=tinysrgb&w=1600">
+      <source src="https://videos.pexels.com/video-files/31617692/13470975_1920_1080_24fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Boca Raton &nbsp;·&nbsp; South Florida</p>
+    <h1 class="hero-title">Your <em>South Florida</em><br>Lifestyle Begins Here</h1>
+    <p class="hero-sub">26 years of expertise. One of Lang Realty's Original 50 agents. Luxury homes, gated communities, and oceanfront living — guided by someone who truly knows this market.</p>
+    <div class="hero-btns">
+      <a href="#listings" class="btn-primary">View Properties</a>
+      <a href="#contact" class="btn-outline">Schedule a Call</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar" role="region" aria-label="Stephanie Kaufman at a glance">
+  <div class="stat-item">
+    <span class="stat-num" aria-label="26 plus years experience">26+</span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" aria-label="500 plus clients served">500+</span>
+    <span class="stat-label">Clients Served</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" aria-label="Top 1 percent in South Florida">Top 1%</span>
+    <span class="stat-label">South Florida</span>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <img class="about-img"
+        src="https://stephaniekaufman.com/wp-content/uploads/2024/05/Sk-header-image.webp"
+        alt="Stephanie Kaufman, Realtor — Boca Raton"
+        onerror="this.src='https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=600&q=80&fit=crop&crop=top'">
+      <div class="about-badge" aria-hidden="true">
+        <span class="num">26+</span>
+        <span class="lbl">Years</span>
+      </div>
+    </div>
+    <div class="about-body">
+      <p class="section-eyebrow reveal">Meet Stephanie</p>
+      <h2 class="section-title reveal">A <em>Trusted</em> Name in<br>South Florida Real Estate</h2>
+      <div class="divider reveal" aria-hidden="true"></div>
+      <p class="reveal">Stephanie Kaufman has earned her place among South Florida's most respected real estate professionals. As one of the select "Original 50" agents at Lang Realty, she brings unmatched knowledge of Boca Raton, Boynton Beach, Delray Beach, and Palm Beach County.</p>
+      <p class="reveal">Her clients range from first-time buyers to seasoned investors and private wealth clients — and the vast majority of her business comes from referrals. That says everything about the experience she delivers.</p>
+      <p class="reveal">Whether you're seeking a golf course estate, oceanfront condominium, or the perfect 55+ community — Stephanie will guide you with honesty, expertise, and genuine care.</p>
+      <div class="cert-grid reveal" aria-label="Professional certifications">
+        <div class="cert-pill">ABR®</div>
+        <div class="cert-pill">CNE®</div>
+        <div class="cert-pill">GRI®</div>
+        <div class="cert-pill">SRES®</div>
+        <div class="cert-pill">SRS®</div>
+        <div class="cert-pill">EPRO®</div>
+      </div>
+      <div class="lang-badge reveal">
+        <img src="https://stephaniekaufman.com/wp-content/uploads/2024/05/langrealty.png" alt="Lang Realty" onerror="this.style.display='none'">
+        <span>Lang Realty · Boca Raton</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LISTINGS ══ -->
+<section class="listings" id="listings">
+  <div class="listings-inner">
+    <p class="section-eyebrow reveal">Featured Properties</p>
+    <h2 class="section-title reveal"><em>Exceptional</em> Homes Across South Florida</h2>
+    <div class="divider reveal" aria-hidden="true"></div>
+    <div class="listings-grid">
+      <div class="listing-card reveal d1">
+        <div class="listing-img-wrap">
+          <img class="listing-img"
+            src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80&fit=crop"
+            alt="Luxury estate in Boca Raton, Florida"
+            onerror="this.src='https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80&fit=crop'">
+          <div class="listing-tag-wrap"><span class="listing-tag">Just Listed</span></div>
+        </div>
+        <div class="listing-body">
+          <span class="listing-price">$2,450,000</span>
+          <span class="listing-addr">3421 Royal Palm Way<br>Boca Raton, FL 33432</span>
+          <div class="listing-meta">
+            <span>5 Beds</span>
+            <span>4.5 Baths</span>
+            <span>4,820 sqft</span>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card reveal d2">
+        <div class="listing-img-wrap">
+          <img class="listing-img"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop"
+            alt="Country club home in Delray Beach, Florida"
+            onerror="this.src='https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&fit=crop'">
+          <div class="listing-tag-wrap"><span class="listing-tag">Active</span></div>
+        </div>
+        <div class="listing-body">
+          <span class="listing-price">$1,175,000</span>
+          <span class="listing-addr">811 Addison Reserve Blvd<br>Delray Beach, FL 33446</span>
+          <div class="listing-meta">
+            <span>3 Beds</span>
+            <span>3 Baths</span>
+            <span>3,100 sqft</span>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card reveal d3">
+        <div class="listing-img-wrap">
+          <img class="listing-img"
+            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&fit=crop"
+            alt="Oceanfront condominium in Highland Beach, Florida"
+            onerror="this.src='https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop'">
+          <div class="listing-tag-wrap"><span class="listing-tag">Price Reduced</span></div>
+        </div>
+        <div class="listing-body">
+          <span class="listing-price">$875,000</span>
+          <span class="listing-addr">3901 S Ocean Blvd #4F<br>Highland Beach, FL 33487</span>
+          <div class="listing-meta">
+            <span>2 Beds</span>
+            <span>2 Baths</span>
+            <span>1,650 sqft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="listing-cta reveal">
+      <a href="#contact">View All Listings &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SPECIALTIES — text fully outside images ══ -->
+<section class="specialties" id="specialties">
+  <div class="specialties-inner">
+    <p class="section-eyebrow reveal">Areas of Expertise</p>
+    <h2 class="section-title reveal">Every <em>Lifestyle.</em> Every Market.</h2>
+    <div class="divider reveal" aria-hidden="true"></div>
+    <div class="spec-grid">
+
+      <div class="spec-card reveal d1">
+        <div class="spec-img-wrap">
+          <img class="spec-img"
+            src="https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=900&q=80&fit=crop"
+            alt="Golf course at a luxury country club in Boca Raton"
+            onerror="this.src='https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=900&q=80&fit=crop'">
+        </div>
+        <div class="spec-body">
+          <span class="spec-tag">Boca West · Broken Sound · Mizner</span>
+          <span class="spec-name">Golf & Country Clubs</span>
+          <p class="spec-desc">Stephanie knows every fairway and floor plan across Boca Raton and Delray Beach's most prestigious clubs — from St. Andrews to Woodfield.</p>
+        </div>
+      </div>
+
+      <div class="spec-card reveal d2">
+        <div class="spec-img-wrap">
+          <img class="spec-img"
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&fit=crop"
+            alt="Oceanfront beach and waterfront living in South Florida"
+            onerror="this.src='https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&q=80&fit=crop'">
+        </div>
+        <div class="spec-body">
+          <span class="spec-tag">Highland Beach · Palm Beach</span>
+          <span class="spec-name">Oceanfront & Waterfront</span>
+          <p class="spec-desc">Luxury condominiums along the Atlantic coast from Highland Beach to Palm Beach. Beachfront living — expertly negotiated and beautifully placed.</p>
+        </div>
+      </div>
+
+      <div class="spec-card reveal d1">
+        <div class="spec-img-wrap">
+          <img class="spec-img"
+            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=80&fit=crop"
+            alt="Luxury gated community home in Boca Raton"
+            onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80&fit=crop'">
+        </div>
+        <div class="spec-body">
+          <span class="spec-tag">Boca Raton · Boynton Beach</span>
+          <span class="spec-name">Gated Communities</span>
+          <p class="spec-desc">From guard-gated estates to family neighborhoods — Stephanie knows every community, every HOA, and every floor plan intimately.</p>
+        </div>
+      </div>
+
+      <div class="spec-card reveal d2">
+        <div class="spec-img-wrap">
+          <img class="spec-img"
+            src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=900&q=80&fit=crop"
+            alt="Active adult 55 plus resort-style community pool"
+            onerror="this.src='https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=900&q=80&fit=crop'">
+        </div>
+        <div class="spec-body">
+          <span class="spec-tag">Valencia Communities</span>
+          <span class="spec-name">55+ Active Living</span>
+          <p class="spec-desc">South Florida's premier active adult communities. Stephanie is the undisputed go-to expert for all Valencia buyers and sellers across the region.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS — horizontal slider ══ -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-header reveal">
+    <p class="section-eyebrow">Client Stories</p>
+    <h2 class="section-title">Words From Those <em>She's Guided</em></h2>
+    <div class="divider" aria-hidden="true"></div>
+  </div>
+
+  <div class="testi-track-outer">
+    <div class="testi-track" id="testiTrack" role="list" aria-label="Client testimonials">
+
+      <div class="testi-card" role="listitem">
+        <div class="testi-qmark" aria-hidden="true">&ldquo;</div>
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">Stephanie was with us every step of the way. We relocated from New York and she found us the perfect home in Boca West. Her knowledge of the communities is truly unmatched.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">MT</div>
+          <div>
+            <span class="testi-name">Michael & Rebecca T.</span>
+            <span class="testi-loc">Boca West Country Club</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card" role="listitem">
+        <div class="testi-qmark" aria-hidden="true">&ldquo;</div>
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">We've used Stephanie three times now — two purchases and one sale. She always gets us the best outcome and makes the whole process feel completely effortless. There is no one else we'd ever call.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">DS</div>
+          <div>
+            <span class="testi-name">David & Linda S.</span>
+            <span class="testi-loc">Highland Beach Oceanfront</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card" role="listitem">
+        <div class="testi-qmark" aria-hidden="true">&ldquo;</div>
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">As a first-time buyer I was nervous, but Stephanie made me feel completely informed and confident. She fought hard for my offer and I closed $40k under asking. Truly incredible service.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">JK</div>
+          <div>
+            <span class="testi-name">Jennifer K.</span>
+            <span class="testi-loc">Valencia Grand, Boynton Beach</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card" role="listitem">
+        <div class="testi-qmark" aria-hidden="true">&ldquo;</div>
+        <div class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="testi-text">Stephanie's market knowledge saved us from overpaying on two separate occasions. Her negotiation skills are extraordinary. We've referred her to four friends — all of whom are now clients too.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" aria-hidden="true">PW</div>
+          <div>
+            <span class="testi-name">Patricia & William H.</span>
+            <span class="testi-loc">St. Andrews Country Club</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="testi-footer">
+    <div class="testi-dots" id="testiDots" role="tablist" aria-label="Testimonial navigation">
+      <button class="testi-dot active" data-index="0" role="tab" aria-label="Testimonial 1" aria-selected="true"></button>
+      <button class="testi-dot" data-index="1" role="tab" aria-label="Testimonial 2" aria-selected="false"></button>
+      <button class="testi-dot" data-index="2" role="tab" aria-label="Testimonial 3" aria-selected="false"></button>
+      <button class="testi-dot" data-index="3" role="tab" aria-label="Testimonial 4" aria-selected="false"></button>
+    </div>
+    <span class="testi-counter" id="testiCounter" aria-live="polite">1 / 4</span>
+    <div class="testi-arrows">
+      <button class="testi-arrow" id="testiPrev" aria-label="Previous testimonial">&#8592;</button>
+      <button class="testi-arrow" id="testiNext" aria-label="Next testimonial">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow reveal">Get In Touch</p>
+    <h2 class="section-title reveal">Let's Find Your <em>Perfect</em> Home</h2>
+    <div class="divider reveal" aria-hidden="true"></div>
+    <p class="contact-sub reveal">Whether you're buying, selling, or simply exploring your options — Stephanie is one call away. No pressure, just expertise and results.</p>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)" novalidate>
+      <div class="form-row">
+        <input type="text" placeholder="First Name" aria-label="First Name" required>
+        <input type="text" placeholder="Last Name" aria-label="Last Name" required>
+      </div>
+      <input type="email" placeholder="Email Address" aria-label="Email Address" required>
+      <input type="tel" placeholder="Phone Number" aria-label="Phone Number">
+      <select aria-label="I am looking to" required>
+        <option value="" disabled selected>I'm looking to...</option>
+        <option>Buy a Property</option>
+        <option>Sell a Property</option>
+        <option>Buy &amp; Sell</option>
+        <option>Explore the Market</option>
+      </select>
+      <input type="text" placeholder="Area of Interest (e.g. Boca West, Valencia, Oceanfront)" aria-label="Area of interest">
+      <textarea placeholder="Tell me a bit about what you're looking for..." aria-label="Message"></textarea>
+      <button type="submit" class="form-submit">Send Message — I'll Be In Touch Shortly</button>
+    </form>
+    <div class="contact-info reveal" role="contentinfo">
+      <div class="contact-row">
+        <div class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.08 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div class="contact-detail"><a href="tel:5619291770">(561) 929-1770</a><br>Call or Text Anytime</div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="contact-detail"><a href="mailto:stephanie@stephaniekaufman.com">stephanie@stephaniekaufman.com</a></div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="contact-detail">Lang Realty<br>6653 Jog Road, Boca Raton, FL 33496</div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div class="contact-detail"><a href="https://stephaniekaufman.com" target="_blank" rel="noopener">stephaniekaufman.com</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Stephanie <span>Kaufman</span></div>
+    <div class="footer-sub">Lang Realty · Boca Raton, Florida</div>
+    <div class="footer-divider" aria-hidden="true"></div>
+    <p>REALTOR® · ABR® · CNE® · EPRO® · GRI® · SRES® · SRS<br>
+    © 2025 Stephanie Kaufman. All rights reserved.<br>
+    Site design for demonstration purposes only.</p>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" role="complementary" aria-label="Contact Stephanie">
+  <p><strong>Ready to find your home?</strong></p>
+  <a href="tel:5619291770">Call (561) 929-1770</a>
+</div>
+
+<script>
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, {threshold:0.08, rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Nav is non-sticky — no scroll listener needed */
+
+/* ── Form submit ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Message Sent — Stephanie Will Be In Touch Shortly';
+  btn.style.background = '#3d6b4f';
+  btn.disabled = true;
+}
+
+/* ── Testimonial Slider ── */
+(function(){
+  const track = document.getElementById('testiTrack');
+  const dots = document.querySelectorAll('.testi-dot');
+  const counter = document.getElementById('testiCounter');
+  const cards = track.querySelectorAll('.testi-card');
+  const total = cards.length;
+  let current = 0;
+
+  function getCardWidth() {
+    return cards[0].getBoundingClientRect().width + 20; // card + gap
+  }
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(index, total - 1));
+    track.scrollTo({ left: current * getCardWidth(), behavior: 'smooth' });
+    dots.forEach((d,i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', i === current);
+    });
+    counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  document.getElementById('testiNext').addEventListener('click', () => goTo(current + 1));
+  document.getElementById('testiPrev').addEventListener('click', () => goTo(current - 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.index))));
+
+  // Update dots on manual scroll
+  track.addEventListener('scroll', () => {
+    const idx = Math.round(track.scrollLeft / getCardWidth());
+    if(idx !== current) {
+      current = idx;
+      dots.forEach((d,i) => {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', i === current);
+      });
+      counter.textContent = (current + 1) + ' / ' + total;
+    }
+  }, {passive:true});
+
+  // Drag to scroll on desktop
+  let isDragging = false, startX = 0, scrollStart = 0;
+  track.addEventListener('mousedown', e => {
+    isDragging = true; startX = e.pageX; scrollStart = track.scrollLeft;
+    track.classList.add('dragging');
+  });
+  window.addEventListener('mousemove', e => {
+    if(!isDragging) return;
+    track.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  window.addEventListener('mouseup', () => {
+    if(!isDragging) return;
+    isDragging = false;
+    track.classList.remove('dragging');
+    goTo(Math.round(track.scrollLeft / getCardWidth()));
+  });
+})();
+</script>
+</body>
+</html>
