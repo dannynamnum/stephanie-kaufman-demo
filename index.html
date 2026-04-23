@@ -235,6 +235,113 @@ footer p{font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;line-height:
   .contact-info{grid-template-columns:1fr}
   .testi-card{flex:0 0 88%}
 }
+
+/* ── POPUP ── */
+.popup-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(10,6,3,0.72);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s ease;
+}
+.popup-overlay.visible{opacity:1;pointer-events:all}
+.popup-card{
+  background:var(--warm-white);
+  max-width:480px;width:100%;
+  border-radius:2px;
+  overflow:hidden;
+  position:relative;
+  transform:translateY(20px);
+  transition:transform 0.4s ease;
+}
+.popup-overlay.visible .popup-card{transform:translateY(0)}
+.popup-img{
+  width:100%;height:200px;
+  object-fit:cover;object-position:center;
+  display:block;
+}
+.popup-body{padding:36px 36px 32px}
+.popup-eyebrow{
+  font-size:10px;letter-spacing:0.28em;
+  color:var(--champagne-dark);text-transform:uppercase;
+  font-weight:500;margin-bottom:12px;display:block;
+}
+.popup-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;line-height:1.15;
+  color:var(--espresso);margin-bottom:10px;
+}
+.popup-title em{font-style:italic}
+.popup-sub{
+  font-size:14px;font-weight:300;
+  color:var(--text-muted);line-height:1.7;
+  margin-bottom:28px;
+}
+.popup-form{display:flex;flex-direction:column;gap:10px}
+.popup-input{
+  width:100%;background:#fff;
+  border:1.5px solid var(--sand);
+  color:var(--espresso);padding:14px 16px;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:300;
+  border-radius:2px;outline:none;
+  transition:border-color 0.2s;
+}
+.popup-input::placeholder{color:#B0A49D}
+.popup-input:focus{border-color:var(--champagne-dark)}
+.popup-submit{
+  background:var(--espresso);color:#fff;border:none;
+  padding:15px;font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:500;letter-spacing:0.05em;
+  cursor:pointer;border-radius:2px;
+  transition:background 0.2s;
+}
+.popup-submit:hover{background:var(--mocha)}
+.popup-skip{
+  display:block;text-align:center;
+  margin-top:14px;font-size:12px;
+  color:var(--text-muted);cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;
+  background:none;border:none;font-family:'DM Sans',sans-serif;
+  width:100%;
+}
+.popup-skip:hover{color:var(--espresso)}
+.popup-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(28,20,16,0.55);border:none;
+  color:#fff;font-size:16px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;
+  justify-content:center;z-index:10;
+  transition:background 0.2s;
+}
+.popup-close:hover{background:rgba(28,20,16,0.85)}
+.popup-success{
+  text-align:center;padding:48px 36px;
+  display:none;
+}
+.popup-success-icon{
+  width:56px;height:56px;
+  background:var(--champagne-light);
+  border-radius:50%;display:flex;
+  align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:22px;
+}
+.popup-success h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;
+  color:var(--espresso);margin-bottom:10px;
+}
+.popup-success p{
+  font-size:14px;color:var(--text-muted);
+  font-weight:300;line-height:1.7;
+}
+@media(max-width:600px){
+  .popup-body{padding:28px 24px 24px}
+  .popup-img{height:160px}
+  .popup-title{font-size:24px}
+}
 </style>
 </head>
 <body>
@@ -685,6 +792,76 @@ function handleSubmit(e) {
     isDragging = false;
     track.classList.remove('dragging');
     goTo(Math.round(track.scrollLeft / getCardWidth()));
+  });
+})();
+</script>
+
+<!-- ── POPUP ── -->
+<div class="popup-overlay" id="popup" role="dialog" aria-modal="true" aria-label="Get Stephanie's market report">
+  <div class="popup-card" id="popupCard">
+    <button class="popup-close" id="popupClose" aria-label="Close">&#10005;</button>
+    <img
+      class="popup-img"
+      src="https://images.unsplash.com/photo-1613490493576-4d0d8a2f2b8d?w=900&q=80&fit=crop&crop=bottom"
+      alt="South Florida luxury home exterior"
+      onerror="this.src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80&fit=crop'"
+    >
+    <div class="popup-body" id="popupBody">
+      <span class="popup-eyebrow">Complimentary Market Report</span>
+      <h2 class="popup-title">Thinking of Buying or Selling<br>in <em>South Florida?</em></h2>
+      <p class="popup-sub">Get Stephanie's insider market guide — current listings, pricing trends, and expert advice. Free, no obligation.</p>
+      <div class="popup-form">
+        <input class="popup-input" type="text" placeholder="Your First Name" aria-label="First Name">
+        <input class="popup-input" type="email" placeholder="Your Email Address" aria-label="Email Address" id="popupEmail">
+        <button class="popup-submit" id="popupSubmit">Send Me the Report</button>
+      </div>
+      <button class="popup-skip" id="popupSkip">No thanks, I'll browse on my own</button>
+    </div>
+    <div class="popup-success" id="popupSuccess">
+      <div class="popup-success-icon">✓</div>
+      <h3>You're all set!</h3>
+      <p>Stephanie will be in touch shortly with your complimentary South Florida market report.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Popup ── */
+(function(){
+  const overlay = document.getElementById('popup');
+  const closeBtn = document.getElementById('popupClose');
+  const skipBtn = document.getElementById('popupSkip');
+  const submitBtn = document.getElementById('popupSubmit');
+  const successPanel = document.getElementById('popupSuccess');
+  const bodyPanel = document.getElementById('popupBody');
+
+  function closePopup(){
+    overlay.classList.remove('visible');
+    sessionStorage.setItem('sk_popup_dismissed','1');
+  }
+
+  function showPopup(){
+    if(sessionStorage.getItem('sk_popup_dismissed')) return;
+    overlay.classList.add('visible');
+  }
+
+  // Show after 4 seconds
+  setTimeout(showPopup, 4000);
+
+  // Close on X, skip, or outside click
+  closeBtn.addEventListener('click', closePopup);
+  skipBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', e => { if(e.target === overlay) closePopup(); });
+
+  // Keyboard close
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closePopup(); });
+
+  // Submit
+  submitBtn.addEventListener('click', () => {
+    bodyPanel.style.display = 'none';
+    successPanel.style.display = 'block';
+    sessionStorage.setItem('sk_popup_dismissed','1');
+    setTimeout(closePopup, 3000);
   });
 })();
 </script>
