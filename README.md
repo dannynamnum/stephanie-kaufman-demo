@@ -1,2 +1,0 @@
-# stephanie-kaufman-demo
-
