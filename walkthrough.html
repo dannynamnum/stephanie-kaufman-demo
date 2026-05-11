@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A personal walkthrough of Stephanie Kaufman's new website by Danny Namnum." />
+<title>A walkthrough · Stephanie Kaufman</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Option A — Warm Luxury (matches index.html) */
+    --cream: #F7F3EE;
+    --warm-white: #FDFAF7;
+    --dark: #1C1410;
+    --dark-soft: #3D2B1F;
+    --accent: #C9A96E;
+    --accent-dark: #A07A3E;
+    --accent-light: #E8D5B0;
+    --sand: #E8E0D4;
+    --text-muted: #5C504A;
+
+    /* Danny's brand for sticky bar (hardcoded across all prospects) */
+    --brand-cream: #F0EDE8;
+    --brand-ink: #151821;
+    --brand-ink-hover: #2C2A33;
+    --brand-text: #3A3530;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    background: var(--dark);
+    color: var(--warm-white);
+    line-height: 1.7;
+    padding-bottom: 64px; /* sticky bar height */
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent-light); color: var(--dark); }
+
+  /* ===== PAGE WRAPPER ===== */
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 24px 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* ===== WORDMARK ===== */
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--warm-white);
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  }
+  .wordmark:hover { opacity: 0.85; }
+  .wordmark .accent { color: var(--accent); font-style: italic; font-weight: 300; }
+
+  /* ===== EYEBROW ===== */
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  /* ===== VIDEO WRAP ===== */
+  .video-wrap {
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 36px;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .video-aspect {
+    position: relative;
+    padding-bottom: 217.4129353233831%;
+    height: 0;
+    width: 100%;
+  }
+  .video-aspect iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ===== CTA BUTTON ===== */
+  .demo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--dark);
+    padding: 16px 32px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    font-family: 'DM Sans', sans-serif;
+    margin-bottom: 28px;
+  }
+  .demo-btn:hover {
+    background: var(--accent-dark);
+    color: var(--warm-white);
+    transform: translateY(-2px);
+  }
+  .demo-btn .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .demo-btn:hover .arrow { transform: translateX(4px); }
+
+  /* ===== HOW THIS WORKS ===== */
+  .how-link {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid rgba(201,169,110,0.35);
+    padding-bottom: 2px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    margin-bottom: 40px;
+  }
+  .how-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== FOOTER ATTRIBUTION ===== */
+  .footer-attr {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-attr .accent { color: var(--accent); }
+
+  /* ===== STICKY CTA BAR — DANNY'S BRAND ===== */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--brand-cream);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+  }
+  .sticky-inner {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .sticky-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--brand-text);
+    white-space: nowrap;
+  }
+  .sticky-btn {
+    background: var(--brand-ink);
+    color: var(--brand-cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 11px 24px;
+    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .sticky-btn:hover {
+    background: var(--brand-ink-hover);
+    transform: translateY(-1px);
+  }
+  .sticky-btn .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+  }
+  .sticky-btn:hover .arrow { transform: translateX(3px); }
+
+  /* ===== RESPONSIVE — MOBILE ===== */
+  @media (max-width: 640px) {
+    body { padding-bottom: 60px; }
+    .page { padding: 24px 20px 40px; }
+    .video-wrap { max-width: 100%; }
+    .sticky-bar { height: 60px; padding: 0 16px; }
+    .sticky-inner { gap: 16px; }
+    .sticky-label { font-size: 12px; }
+    .sticky-btn { padding: 10px 18px; font-size: 12px; }
+  }
+
+  @media (max-width: 380px) {
+    .sticky-label { font-size: 11px; }
+    .sticky-btn { padding: 9px 14px; font-size: 11px; letter-spacing: 0; }
+  }
+</style>
+</head>
+<body>
+
+<main class="page">
+  <a href="https://stephanie-kaufman-demo.vercel.app/" class="wordmark" aria-label="Visit Stephanie Kaufman's demo site">
+    Stephanie <span class="accent">Kaufman</span>
+  </a>
+
+  <div class="eyebrow">A personal walkthrough</div>
+
+  <div class="video-wrap">
+    <div class="video-aspect">
+      <iframe
+        src="https://www.loom.com/embed/cd3b9d97443c44ceac910ce57a6d06ac?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true&hideLogo=true"
+        title="Walkthrough video for Stephanie Kaufman"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <a href="https://stephanie-kaufman-demo.vercel.app/" class="demo-btn">
+    View Your Demo <span class="arrow">→</span>
+  </a>
+
+  <a href="https://namnumdesign.co" class="how-link" target="_blank" rel="noopener">How this works</a>
+
+  <p class="footer-attr">Built by <span class="accent">Namnum Design Co</span></p>
+</main>
+
+<div class="sticky-bar" role="region" aria-label="Schedule a call">
+  <div class="sticky-inner">
+    <span class="sticky-label">Like what you see?</span>
+    <a href="https://fantastical.app/Namnum/Intro-conversation" class="sticky-btn" target="_blank" rel="noopener">
+      Let's Talk <span class="arrow">→</span>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
